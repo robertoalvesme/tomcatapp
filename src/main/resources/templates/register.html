@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+
+    <a th:href="@{/}" href="/home">Home</a>
+    <a th:href="@{/login}" href="/login">Login</a>
+    <a th:href="@{/secured}" href="/secured">Restricted Area</a>
+    <a th:href="@{/logout}" href="/logout">Logout</a>
+
+    <h1>Register Form</h1>
+
+    <th:block th:if="${alert != null}">
+        <strong th:text="${alert}">Alert Message</strong>
+    </th:block>
+
+    <!--/*@thymesVar id="user" type="br.com.rhfactor.tomcatapp.User"*/-->
+    <form th:fragment="registerForm" id="registerForm" th:action="@{/register}" action="/register" th:object="${user}" method="post" >
+        <div class="form-group row">
+            <label for="username" class="col-sm-3" th:text="#{username}">Email</label>
+            <div class="col-sm-9">
+                <input type="text" th:field="*{username}" class="form-control form-control-lg" id="username" aria-describedby="username" />
+                <small class="form-text text-muted" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></small>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="password" class="col-sm-3" th:text="#{password}">Senha</label>
+            <div class="col-sm-9">
+                <input type="password" th:field="*{password}" class="form-control form-control-lg" id="password" aria-describedby="password" />
+                <small class="form-text text-muted" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></small>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-right">
+                <button type="submit" class="btn btn-secondary btn-lg mb-2" th:text="#{login}">Login</button>
+            </div>
+        </div>
+    </form>
+
+</body>
+</html>
